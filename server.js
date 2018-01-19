@@ -15,8 +15,8 @@ const __API_URL__ = ''
 
 app.get("/test", (req, res) =>{
     // res.send('success')
-    superAgent.get("https://api.edamam.com/search")
-    .set("API-Key", "56091429890ff1ac97ff6d90ffe5e9ba")
+    superAgent.get("https://api.edamam.com/search?q=chicken&app_id=20bfab81&app_key=56091429890ff1ac97ff6d90ffe5e9ba&from=0&to=3&calories=gte%20591,%20lte%20722&health=alcohol-free")
+    .set("Authorization", "token 56091429890ff1ac97ff6d90ffe5e9ba")
     .set("Accept", "application/json")
     .then(function (result) {
      console.log(result.status, result.headers, result.body)
