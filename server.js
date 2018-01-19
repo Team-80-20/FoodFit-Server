@@ -11,19 +11,22 @@ app.use(cors())
 
 const __API_URL__ = ''
 
-app.get("/search", express.json(), express.urlencoded({extended:true}), (req, res) =>{
+app.get("/search", (req, res) =>{
+    console.log('hi from server')
+    // res.send('hi')
     const food = req.query.food
     const minCal = req.query.minCal
     const maxCal = req.query.maxCal
     const healthLabel = req.query.healthLabel
-    const url = `https://api.edamam.com/search?q=${food}&app_id=20bfab81&app_key=56091429890ff1ac97ff6d90ffe5e9ba&from=0&to=10&calories=gte%20${minCal},%20lte%20${maxCal}&health=${healthLabel}`
+    const url = `https://api.edamam.com/search?q=${food}&app_id=20bfab81&app_key=56091429890ff1ac97ff6d90ffe5e9ba&from=0&to=10&calories=gte%20${minCal},%20lte%20${maxCal}`
     console.log(url)
-    res.send(url)
+    // res.send(url)
     superAgent.get(url)
     .then(function (result) {
-     console.log(result.status, result.headers, result.body)
+        res.send(result.body)
+     console.log(result)
     })
-    .catch(result => console.log(result.status, result.headers, result.body))
+    .catch(result => console.error('error', result.status, result.headers, result.body))
 })
 
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
