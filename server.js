@@ -19,6 +19,7 @@ app.get("/search", (req, res) =>{
     const url = `https://api.edamam.com/search?q=${food}&app_id=20bfab81&app_key=56091429890ff1ac97ff6d90ffe5e9ba&from=0&to=8&calories=gte%20${minCal},%20lte%20${maxCal}${healthLabel}`
     superAgent.get(url)
     .then(function (result) {
+        console.log(url)
         res.send(result.body)
     })
     .catch(result => console.error('error', result.status, result.headers, result.body))
