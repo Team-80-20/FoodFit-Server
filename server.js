@@ -20,7 +20,6 @@ app.get("/search", (req, res) =>{
     superAgent.get(url)
     .then(function (result) {
         res.send(result.body)
-        console.log(url)
     })
     .catch(result => console.error('error', result.status, result.headers, result.body))
 })
